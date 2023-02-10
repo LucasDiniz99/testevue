@@ -124,6 +124,14 @@
                         </div>
                     </div>
                     <div class="card-body px-3">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Busque pelo nome da pessoa" id="campo-busca">
+                                <div class="input-group-append">
+                                    <button onclick="app.search()" type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="container-table-pessoas">
                             <people-list :people="people" />
                         </div>
@@ -201,10 +209,9 @@
                     this.people = [];
                     const index = this.personProvider.getIndex().data;
                     for(const id in index) {
-                        try {
-                            this.people.push(JSON.parse(window.localStorage.getItem(index[id])));
-                        } catch(exception) {
-
+                        let entry = window.localStorage.getItem(index[id]);
+                        if(entry && entry != 'undefined') {
+                            this.people.push(JSON.parse(entry));
                         }
                     }
                 },
@@ -246,6 +253,9 @@
                 deletar(element) {
                     this.personProvider.update($(element).attr('data-id'));
                     this.refresh();
+                },
+                search() {
+                    this.people = this.personProvider.findByName($('#campo-busca').val());
                 }
             }
         });

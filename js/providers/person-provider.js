@@ -2,8 +2,7 @@ class PersonProvider {
     constructor() {
     }
 
-    getLastId()
-    {
+    getLastId() {
         return this.getIndex().id;
     }
 
@@ -21,7 +20,7 @@ class PersonProvider {
 
     getIndex() {
         let index = window.localStorage.getItem('data_index');
-        if(!index) {
+        if (!index) {
             index = '{"id": 0, "data": {}}';
         }
         return JSON.parse(index);
@@ -29,8 +28,8 @@ class PersonProvider {
 
     findKeyById(id) {
         const index = this.getIndex().data;
-        for(const indexId in index) {
-            if(indexId == id) {
+        for (const indexId in index) {
+            if (indexId == id) {
                 return index[indexId];
             }
         }
@@ -41,13 +40,24 @@ class PersonProvider {
         return JSON.parse(window.localStorage.getItem(key));
     }
 
-    findByParams(params, value) {
-        return { name: 'test' }
+    findByName(name = '') {
+        const index = this.getIndex().data;
+        const results = new Array();
+        for (const indexId in index) {
+            let entry = window.localStorage.getItem(index[indexId]);
+            if (entry && entry != 'undefined') {
+                entry = JSON.parse(entry);
+                if (entry.name.toLowerCase().indexOf(name.toLowerCase()) > -1) {
+                    results.push(entry);
+                }
+            }
+        }
+        return results;
     }
 
     save(cadastro) {
         cadastro.id = this.getLastId();
-        const id = 'pessoa.'+cadastro.id;
+        const id = 'pessoa.' + cadastro.id;
         window.localStorage.setItem(id, JSON.stringify(cadastro));
         this.pushIndex(id);
     }
@@ -61,8 +71,8 @@ class PersonProvider {
         const key = this.findKeyById(id);
         const index = this.getIndex().data;
         window.localStorage.removeItem(key);
-        for(const indexId in index) {
-            if(indexId == id) {
+        for (const indexId in index) {
+            if (indexId == id) {
                 index[indexId] = {};
             }
         }
