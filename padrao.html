@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>JR Sistemas</title>
+  <script src="https://unpkg.com/vue@2"></script>
+  <script src="./js/providers/person-provider.js"></script>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div><a href="./test.html">test-me</a></div>
+  <div id="app">
+    {{ title }}
+    <ol>
+      <people-list :people="people" />
+    </ol>
+  </div>
+
+  <script>
+    Vue.component('people-list', {
+      props: {
+        people: {
+          type: Array,
+          required: true
+        }
+      },
+      template:
+        `<table>
+          <tr>
+            <th>Nome</th>
+          </tr>
+          <tr v-for="pessoa in people">
+            <td>{{ pessoa.name }}</td>
+          </tr>        
+        </table>`
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        title: 'Cadastro de pessoa',
+        people: [
+          { id: 0, name: 'Felipe Cardoso', dtBirth: '', document: '', email: '', phone: '' },
+          { id: 1, name: 'Carlos Viana', dtBirth: '', document: '', email: '', phone: '' },
+          { id: 2, name: 'Kelly Almeda', dtBirth: '', document: '', email: '', phone: '' }
+        ],
+        personProvider: {}
+      },
+      created() {
+        // instância PersonProvider que será utilizado para efetuar as açoes
+        this.personProvider = new PersonProvider()     
+        this.findByParams()   
+      },
+      methods: {
+        findByParams() {
+          const result = this.personProvider.findByParams()
+          console.log(result)
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+:root {
+    --primary-color: #2b59c3;
+    --secondary-color: #253c78;
+    --tertiary-color: #05B2DC;
+    --text-default: #212529;
+}
+
+.bg-primary-color {
+    background-color: var(--primary-color);
+}
+
+body {
+    color: var(--text-default);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: var(--text-default);
+}
+
+ul, li {
+    padding: 0;
+    list-style: none;
+}
+
+.campos .form-group {
+    padding-right: 0;
+}
+
+#main-sidebar {
+    width: 200px;
+    padding: 15px;
+    background: white;
+    height: 100vh;
+    border-right: 1px solid lightgray;
+}
+
+#main-sidebar .logo {
+    width: 100%;
+    margin: 0;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid lightgrey;
+}
+
+#main-sidebar .logo img {
+    width: 100%;
+    transition: 0.25s ease-in-out;
+}
+
+/* NAV BAR */
+#main-navbar .logo {
+    display: none;
+    width: 200px;
+}
+#main-navbar .logo img {
+    width: 100%;
+    object-fit: scale-down;
+    object-position: left center;
+    max-height: 50px;
+}
+
+#funcoes-secretas {
+    margin-bottom: 0;
+    display: flex;
+}
+#funcoes-secretas i {
+    width: 20px;
+}
+#funcoes-secretas .text {
+    display: none;
+}
+
+@media (max-width: 950px)
+{
+    #main-sidebar, .hide-on-mobile {
+        display: none;
+    }
+    #main-navbar .logo {
+        display: block;
+    }
+}
+@media (max-width: 450px)
+{
+    #main-navbar .logo {
+        width: 150px;
+    }
+}
