@@ -31,6 +31,10 @@ ul, li {
     padding-right: 0;
 }
 
+#login-container {
+    max-width: 800px;
+}
+
 #main-sidebar {
     width: 200px;
     padding: 15px;
