@@ -11,6 +11,8 @@
 
 body {
     color: var(--text-default);
+    height: 100vh;
+    overflow: auto;
 }
 
 * {
@@ -43,7 +45,7 @@ ul, li {
     width: 200px;
     padding: 15px;
     background: white;
-    height: 100vh;
+    height: initial;
     border-right: 1px solid lightgray;
 }
 
