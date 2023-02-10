@@ -67,15 +67,15 @@
                 <div class="col-md-3 p-0 d-flex justify-content-end">
                     <ul class="d-flex align-items-center" id="funcoes-secretas">
                         <li>
-                            <span class="btn icon"><i class="fas fa-users"></i></span>
+                            <span class="btn icon" title="Já estamos aqui"><i class="fas fa-users"></i></span>
                             <span class="text">Gerenciamento de usuários</span>
                         </li>
                         <li class="hide-on-mobile">
-                            <span class="btn icon"><i class="fas fa-mobile"></i></span>
+                            <span class="btn icon" title="Como você quer ir para o mobile?"><i class="fas fa-mobile"></i></span>
                             <span class="text">Mudar de dispositivo</span>
                         </li>
                         <li>
-                            <span class="btn icon"><i class="fas fa-cog"></i></span>
+                            <span class="btn icon" title="Talvez no futuro"><i class="fas fa-cog"></i></span>
                             <span class="text">Configurações</span>
                         </li>
                     </ul>
@@ -85,7 +85,7 @@
         <!-- /NAVBAR -->
         <!-- CONTEUDO -->
         <div id="app" class="container-fluid">
-            <div class="container mx-auto">
+            <div class="container mx-auto p-0">
                 <div class="card mx-auto mt-4">
                     <div class="card-header bg-white px-3">
                         <div>
@@ -124,7 +124,9 @@
                         </div>
                     </div>
                     <div class="card-body px-3">
-                        <people-list :people="people" />
+                        <div class="container-table-pessoas">
+                            <people-list :people="people" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -147,7 +149,7 @@
             },
             template:
                 `
-            <table class="table table-bordered">
+            <table class="table table-bordered table-pessoas">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -162,8 +164,8 @@
                         <td>{{ pessoa.email }}</td>
                         <td>{{ pessoa.phone }}</td>
                         <td class="text-right">
-                            <button type="button" :data-id="pessoa.id" onclick="app.editar(this)" class="btn btn-success mr-2"><i class="fas fa-edit"></i></button>    
-                            <button type="button" :data-id="pessoa.id" onclick="app.deletar(this)" class="btn btn-danger"><i class="fas fa-trash"></i></button>    
+                            <button type="button" :data-id="pessoa.id" onclick="app.editar(this)" class="mx-1 btn btn-success"><i class="fas fa-edit"></i></button>    
+                            <button type="button" :data-id="pessoa.id" onclick="app.deletar(this)" class="mx-1 btn btn-danger"><i class="fas fa-trash"></i></button>    
                         </td>
                     </tr>
                 </tbody>
@@ -202,7 +204,7 @@
                         try {
                             this.people.push(JSON.parse(window.localStorage.getItem(index[id])));
                         } catch(exception) {
-                            
+
                         }
                     }
                 },
